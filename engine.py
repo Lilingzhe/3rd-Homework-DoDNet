@@ -47,7 +47,7 @@ class Engine(object):
             self.local_rank = self.args.local_rank
             self.world_size = int(os.environ['WORLD_SIZE'])
             torch.cuda.set_device(self.local_rank)
-            dist.init_process_group(backend="nccl", init_method='env://')
+            dist.init_process_group(backend="gloo", init_method='env://')
             self.devices = [i for i in range(self.world_size)]
         else:
             gpus = os.environ["CUDA_VISIBLE_DEVICES"]
