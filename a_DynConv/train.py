@@ -119,7 +119,8 @@ def main():
         # Create model
         model = UNet3D(num_classes=args.num_classes, weight_std=args.weight_std)
 
-        model.train()
+        with torch.no_grad():
+            model.train()
 
         device = torch.device('cuda:{}'.format(args.local_rank))
         model.to(device)
